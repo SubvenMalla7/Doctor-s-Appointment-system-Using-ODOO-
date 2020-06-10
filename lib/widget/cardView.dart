@@ -7,10 +7,9 @@ class CardView extends StatefulWidget {
   final String appoPatientId;
   final String appoDoctorId;
   final String date;
-  //final String patientId;
   final Color color;
 
-  // final String doctorId;
+
   const CardView(this.appoinmentId, this.appoPatientId, this.appoDoctorId,
       this.color, this.date);
 

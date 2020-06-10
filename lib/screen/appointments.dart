@@ -31,6 +31,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     }
   }
 
+  Future<void> refresh() {
+    return Provider.of<Appointments>(context).fetchApointemnts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final appointment = Provider.of<Appointments>(context);
@@ -41,23 +45,25 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       Colors.indigo,
       Colors.pinkAccent,
     ];
-   
-   
-    return Container(
+
+    return RefreshIndicator(
+      onRefresh: refresh,
       child: Container(
-        padding: const EdgeInsets.only(top: 40),
-        child: ListView.builder(
-          itemBuilder: (context, index) => CardView(
-              appointment.itemsA[index].appointmentId,
-              appointment.itemsA[index].patientId,
-              appointment.itemsA[index].doctorId,
-              //appointment.itemsP[index].id.toString(),
-              color[index],
-              appointment.itemsA[index].date
-              
-              // appointment.itemsD[index].id,
-              ),
-          itemCount: 5,
+        child: Container(
+          padding: const EdgeInsets.only(top: 40),
+          child: ListView.builder(
+            itemBuilder: (context, index) => CardView(
+                appointment.itemsA[index].appointmentId,
+                appointment.itemsA[index].patientId,
+                appointment.itemsA[index].doctorId,
+                //appointment.itemsP[index].id.toString(),
+                color[index],
+                appointment.itemsA[index].date
+
+                // appointment.itemsD[index].id,
+                ),
+            itemCount: 5,
+          ),
         ),
       ),
     );

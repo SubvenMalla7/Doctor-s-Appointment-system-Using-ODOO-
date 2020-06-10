@@ -85,8 +85,6 @@ class Appointments extends ChangeNotifier {
 
   Future<void> fetchApointemnts() async {
     Uri url = Uri.parse('http://192.168.56.102:8069/get_app');
-    Uri url2 = Uri.parse('http://192.168.56.102:8069/get_patients');
-    Uri url3 = Uri.parse('http://192.168.56.102:8069/get_doctors');
 
     //  print('object');
     try {
