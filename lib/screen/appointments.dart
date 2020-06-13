@@ -38,15 +38,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     final appointment = Provider.of<Appointments>(context);
-    List<Color> color = [
-      Colors.blue.withOpacity(0.5),
-      Colors.pinkAccent,
-      Colors.amber[500],
-      Colors.indigo,
-      Colors.pinkAccent,
-    ];
-
-    return RefreshIndicator(
+     return RefreshIndicator(
       onRefresh: refresh,
       child: Container(
         child: Container(
@@ -56,13 +48,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 appointment.itemsA[index].appointmentId,
                 appointment.itemsA[index].patientId,
                 appointment.itemsA[index].doctorId,
-                //appointment.itemsP[index].id.toString(),
-                color[index],
-                appointment.itemsA[index].date
-
-                // appointment.itemsD[index].id,
-                ),
-            itemCount: 5,
+                
+                appointment.itemsA[index].date),
+            itemCount: appointment.itemsA.length,
           ),
         ),
       ),

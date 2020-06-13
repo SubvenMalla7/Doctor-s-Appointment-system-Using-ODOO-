@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import './model/dataprovider.dart';
 import './screen/home_Screen.dart';
+import './screen/addScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         ),
         home: MainPage(),
         routes: {
-          
+          // AddAppointment.routeName: (ctx) =>
+          //     AddAppointment(Provider.of<Appointments>(context).itemsP),
         },
       ),
     );

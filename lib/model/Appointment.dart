@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Appointment with ChangeNotifier {
   final String appointmentId;
-  final String patientId;
-  final String doctorId;
-  final String date;
+  String patientId;
+  String doctorId;
+  String date;
 
   Appointment({
     @required this.appointmentId,

@@ -7,11 +7,9 @@ class CardView extends StatefulWidget {
   final String appoPatientId;
   final String appoDoctorId;
   final String date;
-  final Color color;
 
-
-  const CardView(this.appoinmentId, this.appoPatientId, this.appoDoctorId,
-      this.color, this.date);
+  const CardView(
+      this.appoinmentId, this.appoPatientId, this.appoDoctorId, this.date);
 
   @override
   _CardViewState createState() => _CardViewState();
@@ -72,13 +70,14 @@ class _CardViewState extends State<CardView> {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: widget.color,
+                  color: Theme.of(context).primaryColor,
+                  //Colors.deepPurple,
                   spreadRadius: 2,
                   blurRadius: 10,
                   offset: Offset(0, 0),
                 )
               ],
-              color: widget.color,
+              color: Colors.deepPurple,
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Column(
             children: <Widget>[

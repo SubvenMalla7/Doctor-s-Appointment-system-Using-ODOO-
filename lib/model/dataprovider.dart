@@ -9,10 +9,11 @@ import './Patient.dart';
 
 class Appointments extends ChangeNotifier {
   var id = '';
+  var mainurl = 'http://192.168.0.107:8069';
 
   Map<String, String> headers = {
     'Content-type': 'application/json',
-    'Cookie': 'session_id=a5b229af4a9badcb046f22ef8930b9dd6bab6543',
+    'Cookie': 'session_id=cbacda570ced3c424243e688a9a5a0b49429b51a',
   };
 
   List<Appointment> itemsA = [];
@@ -27,17 +28,29 @@ class Appointments extends ChangeNotifier {
     return itemsP.firstWhere((med) => med.id == id);
   }
 
+  Patient findByPName(String name) {
+    print(itemsP.firstWhere((med) => med.name == name).id);
+    return itemsP.firstWhere((med) => med.name == name);
+  }
+
   Doctor findByDId(int id) {
     print(itemsD.firstWhere((med) => med.id == id).name);
     return itemsD.firstWhere((med) => med.id == id);
   }
 
+  Doctor findByDName(String name) {
+    print(itemsD.firstWhere((med) => med.name == name).id);
+    return itemsD.firstWhere((med) => med.name == name);
+  }
+
   var parm = jsonEncode({"jsonrpc": "2.0", "params": {}});
 
   Future<void> addAppointment(Appointment appointment) async {
-    final url =
-        'http://192.168.56.102:8069/create_a?api_token=84f91eac23a702674cb5756dcd8a32c9bb45107f';
-
+    print("d12");
+    final url = '$mainurl/create_a';
+    print(appointment.patientId);
+    print(appointment.date);
+    print(appointment.doctorId);
     final response = await http.post(url,
         headers: headers,
         body: jsonEncode({
@@ -48,9 +61,10 @@ class Appointments extends ChangeNotifier {
             "doctor_id": appointment.doctorId,
           }
         }));
-    //print(response.body);
+    print("done");
+    print(response.body);
     final newAppointment = Appointment(
-      appointmentId: json.decode(response.body)['data']['id'],
+      appointmentId: json.decode(response.body)['result']['id'].toString(),
       date: appointment.date,
       doctorId: appointment.doctorId,
       patientId: appointment.patientId,
@@ -62,7 +76,7 @@ class Appointments extends ChangeNotifier {
   }
 
   Future<void> auth() async {
-    final url = 'http://192.168.56.102:8069/web/session/authenticate';
+    final url = '$mainurl/web/session/authenticate';
 
     final response = await http.post(url,
         headers: headers,
@@ -84,7 +98,7 @@ class Appointments extends ChangeNotifier {
   }
 
   Future<void> fetchApointemnts() async {
-    Uri url = Uri.parse('http://192.168.56.102:8069/get_app');
+    Uri url = Uri.parse('$mainurl/get_app');
 
     //  print('object');
     try {
@@ -160,7 +174,7 @@ class Appointments extends ChangeNotifier {
   }
 
   Future<void> fetchPatient() async {
-    Uri url = Uri.parse('http://192.168.56.102:8069/get_patients');
+    Uri url = Uri.parse('$mainurl/get_patients');
 
     print('object');
     try {
@@ -199,7 +213,7 @@ class Appointments extends ChangeNotifier {
   }
 
   Future<void> fetchDoctor() async {
-    Uri url = Uri.parse('http://192.168.56.102:8069/get_doctors');
+    Uri url = Uri.parse('$mainurl/get_doctors');
 
     print('object');
     try {
